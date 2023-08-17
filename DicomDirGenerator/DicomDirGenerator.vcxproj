@@ -77,6 +77,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>XCOPY "$(SolutionDir)DicomDirGenerator\SampleData" "$(TargetDir)\SampleData\" /S /Y</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="generator.cpp" />

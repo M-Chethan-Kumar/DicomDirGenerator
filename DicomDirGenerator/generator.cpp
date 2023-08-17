@@ -10,6 +10,10 @@ Generator::Generator(const int& stduyCount, const int& seriesCount):
 {
 	const auto path = getExecutingDirectory();
 	_inputPath = path / "SampleData" / "Dicom";
+
+	if(!std::filesystem::exists(_inputPath))
+		std::cout << "Error : Input data not found : " << _inputPath << std::endl;
+
 	_outputPath = path / "Output";
 }
 
