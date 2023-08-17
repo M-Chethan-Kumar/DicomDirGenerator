@@ -6,10 +6,12 @@
 /packages
 /x64
 
+
 #
 # Nested directories & files
 #
 
+**/x64
 **/bin/**
 **/obj/**
 **/*.user
