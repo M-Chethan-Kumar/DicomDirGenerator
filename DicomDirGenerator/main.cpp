@@ -1,6 +1,8 @@
 // DicomDirGenerator.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 
+
+#include "generator.h"
+#include "generator.h"
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -20,7 +22,8 @@ bool isValidInteger(const std::string& str) {
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    Dicom::Merge::Library lib;
+    std::cout << "------------------------------DicomDir and dicom files generator -------------!\n";
     std::string input;
 
     // Input and validation for the first integer
@@ -45,17 +48,19 @@ int main()
 
     const int numberOfSeries = std::stoi(input);
 
-    std::cout << "Studies : " << numberOfStudies << std::endl;
-    std::cout << "Series : " << numberOfSeries << std::endl;
+
+    const auto startTime = std::chrono::high_resolution_clock::now();
+    const Generator generator(numberOfStudies, numberOfSeries);
+    generator.create();
+
+    const auto endTime = std::chrono::high_resolution_clock::now();
+    const auto duration = std::chrono::duration_cast<std::chrono::seconds>(endTime - startTime);
+    if(duration.count() != 0)
+		std::cout << "Time taken: " << duration.count() << " seconds" << std::endl;
+    else
+    {
+	    const auto timeTaken = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime);
+        std::cout << "Time taken: " << timeTaken.count() << " milliseconds" << std::endl;
+    }
+    std::cout << "\rDone!        " << std::endl;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
