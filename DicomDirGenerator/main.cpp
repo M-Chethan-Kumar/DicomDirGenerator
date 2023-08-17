@@ -2,10 +2,51 @@
 //
 
 #include <iostream>
+#include <string>
+#include <sstream>
+
+bool isValidInteger(const std::string& str) {
+    std::istringstream ss(str);
+    int num;
+    if (ss >> num) {
+        char remaining;
+        if (ss >> remaining) {
+            return false;
+        }
+        return true;
+    }
+    return false;
+}
 
 int main()
 {
     std::cout << "Hello World!\n";
+    std::string input;
+
+    // Input and validation for the first integer
+    do {
+        std::cout << "Enter number of studies: ";
+        std::cin >> input;
+        if (!isValidInteger(input)) {
+            std::cout << "Invalid input. Please enter a valid integer." << std::endl;
+        }
+    } while (!isValidInteger(input));
+
+    const int numberOfStudies = std::stoi(input);
+
+    // Input and validation for the second integer
+    do {
+        std::cout << "Enter number of series per study: ";
+        std::cin >> input;
+        if (!isValidInteger(input)) {
+            std::cout << "Invalid input. Please enter a valid integer." << std::endl;
+        }
+    } while (!isValidInteger(input));
+
+    const int numberOfSeries = std::stoi(input);
+
+    std::cout << "Studies : " << numberOfStudies << std::endl;
+    std::cout << "Series : " << numberOfSeries << std::endl;
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

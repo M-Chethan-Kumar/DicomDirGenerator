@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.props" Condition="Exists('..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.props')" />
+  <Import Project="..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.props" Condition="Exists('..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.props')" />
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
       <Configuration>Debug</Configuration>
@@ -49,6 +51,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -72,9 +75,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="generator.cpp" />
     <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="generator.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
+    <Import Project="..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.targets" Condition="Exists('..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.targets')" />
+    <Import Project="..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.targets" Condition="Exists('..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.targets')" />
   </ImportGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.props'))" />
+    <Error Condition="!Exists('..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\IBM.Merge.DICOMToolkit.5.14.0.1\build\IBM.Merge.DICOMToolkit.targets'))" />
+    <Error Condition="!Exists('..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.props'))" />
+    <Error Condition="!Exists('..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Philips.Dicom.1.3.0-alpha0987\build\Philips.Dicom.targets'))" />
+  </Target>
 </Project>
