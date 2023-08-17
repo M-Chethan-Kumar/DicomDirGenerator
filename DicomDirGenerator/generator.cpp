@@ -40,6 +40,10 @@ void Generator::create() const
 	{
 		std::cout << "\nDicomDir generation successful :" << _outputPath << std::endl;
 	}
+	else
+	{
+		std::cout << "\nError : Dicom::Directory generate() failed."  << std::endl;
+	}
 }
 
 std::vector<std::filesystem::path> Generator::dicomFileList() const
