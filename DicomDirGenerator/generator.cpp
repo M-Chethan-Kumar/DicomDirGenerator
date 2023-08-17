@@ -93,22 +93,26 @@ std::filesystem::path Generator::getExecutingDirectory()
 
 void Generator::animateProgress(const int& count) const
 {
-	auto iterations = _studyCount * _seriesCount;
-	const int maxRadius = 50;
-	const char fillChar = '#';
-	const char emptyChar = ' ';
+	const auto iterations = _studyCount * _seriesCount;
+	constexpr auto end = 100;
+	auto progress = ((count +1) * 100) / iterations;
+	constexpr int maxRadius = 50;
 
-	int radius = (count * maxRadius) / iterations;
-	int spaces = maxRadius - radius;
+	const int radius = (progress * maxRadius) / end;
+	const int spaces = maxRadius - radius;
 
 	std::cout << "\r[";
-	for (int j = 0; j < radius; ++j) {
+	for (int j = 0; j < radius; ++j)
+	{
+		constexpr char fillChar = '#';
 		std::cout << fillChar;
 	}
-	for (int j = 0; j < spaces; ++j) {
+	for (int j = 0; j < spaces; ++j)
+	{
+		constexpr char emptyChar = ' ';
 		std::cout << emptyChar;
 	}
-	std::cout << "] " << (count + 1) << "/" << iterations;
+	std::cout << "] " << (progress) << "/" << end;
 
 	std::this_thread::sleep_for(std::chrono::milliseconds(50));
 
