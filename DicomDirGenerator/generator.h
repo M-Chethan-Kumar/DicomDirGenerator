@@ -8,10 +8,11 @@ public:
 	Generator(const int& stduyCount, const int& seriesCount);
 	void create() const;
 
+	static std::filesystem::path getExecutingDirectory();
+
 private:
 	std::vector<std::filesystem::path> dicomFileList() const;
 	std::vector<Dicom::Merge::Message> generateMessages(const int& studyIndex) const;
-	static std::filesystem::path getExecutingDirectory();
 	void animateProgress(const int& count) const;
 
 	std::filesystem::path _inputPath;

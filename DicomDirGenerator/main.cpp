@@ -1,8 +1,7 @@
 // DicomDirGenerator.cpp : This file contains the 'main' function. Program execution begins and ends there.
 
-
 #include "generator.h"
-#include "generator.h"
+#include <TraceWriter.h>
 #include <iostream>
 #include <string>
 #include <sstream>
@@ -22,6 +21,8 @@ bool isValidInteger(const std::string& str) {
 
 int main()
 {
+    std::filesystem::path path = Generator::getExecutingDirectory() / "Traces";
+    Trace::TraceWriterFile	trace(path);
     Dicom::Merge::Library lib;
     std::cout << "------------------------------DicomDir and dicom files generator -------------!\n";
     std::string input;
